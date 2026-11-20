@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="bn">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>mulla.nazmul.islam</title>
+<style>
+:root{--bg:#fafaf7;--fg:#1c1c1a;--mut:#6b6b66;--card:#fff;--bd:#e4e4de}
+@media (prefers-color-scheme:dark){:root{--bg:#121211;--fg:#f0f0ea;--mut:#a0a09a;--card:#1c1c1a;--bd:#2e2e2b}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:system-ui,-apple-system,"Noto Sans Bengali",sans-serif;line-height:1.6}
+main{max-width:960px;margin:0 auto;padding:24px 16px 48px}
+h1{font-size:1.6rem;margin:0}
+.sub{color:var(--mut);margin:4px 0 24px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px}
+.item{background:var(--card);border:1px solid var(--bd);border-radius:12px;overflow:hidden}
+.item img,.item video{width:100%;display:block;max-height:360px;object-fit:cover;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
+.item .t{padding:10px 12px;font-size:.95rem}
+.empty{color:var(--mut);text-align:center;padding:32px 0}
+h2{font-size:1.15rem;margin:36px 0 10px}
+.contact{display:flex;flex-wrap:wrap;gap:10px}
+.contact a,.contact span{background:var(--card);border:1px solid var(--bd);border-radius:999px;padding:8px 16px;color:var(--fg);text-decoration:none}
+</style>
+</head>
+<body>
+<main>
+  <h1>mulla.nazmul.islam</h1>
+  <p class="sub">আমার কাজের সংগ্রহ</p>
+  <section class="grid" id="grid"></section>
+  <p class="empty" id="empty">কাজ শীঘ্রই যোগ হবে।</p>
+  <h2>যোগাযোগ</h2>
+  <div class="contact">
+    <span>@mullanazmulislam</span>
+    <a href="https://wa.me/8801759193161" target="_blank" rel="noopener">WhatsApp: 01759193161</a>
+    <a href="https://www.facebook.com/share/1CsTXXs9CC/" target="_blank" rel="noopener">Facebook: Mulla Nazmul Islam</a>
+  </div>
+</main>
+<script>
+// নতুন কাজ যোগ করতে media ফোল্ডারে ফাইল রাখুন, তারপর নিচের তালিকায় একটি লাইন যোগ করুন।
+// type: "image" বা "video"
+var WORKS=[
+  // {file:"media/photo1.jpg", type:"image", title:"আমার প্রথম কাজ"},
+  // {file:"media/video1.mp4", type:"video", title:"ভিডিও কাজ"},
+];
+document.addEventListener("contextmenu",function(e){e.preventDefault()});
+document.addEventListener("dragstart",function(e){e.preventDefault()});
+var g=document.getElementById("grid");
+document.getElementById("empty").style.display=WORKS.length?"none":"block";
+WORKS.forEach(function(w){
+  var b=document.createElement("div");b.className="item";var m;
+  if(w.type==="video"){
+    m=document.createElement("video");m.src=w.file;m.controls=true;m.preload="metadata";m.playsInline=true;
+    m.setAttribute("controlsList","nodownload noplaybackrate");m.disablePictureInPicture=true;
+  }else{
+    m=document.createElement("img");m.src=w.file;m.alt=w.title||"";m.draggable=false;m.loading="lazy";
+  }
+  b.appendChild(m);
+  if(w.title){var t=document.createElement("div");t.className="t";t.textContent=w.title;b.appendChild(t)}
+  g.appendChild(b);
+});
+</script>
+</body>
+</html>
